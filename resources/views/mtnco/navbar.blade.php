@@ -16,9 +16,9 @@
                             <span>MT Nco</span>
                         </div>
                     </div>
-                    <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                    <a href="" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
                     <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" style="background-color:White" aria-labelledby="profile-dropdown">
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="" class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-settings text-primary"></i>
@@ -55,8 +55,8 @@
             </li>
 <br>
             <form type="get" action="{{url('/search')}}">
-    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle">
-    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White">
+    <button class="btn btn-success" type="submit">Search</button>
 </form>
 
             <li class="nav-item nav-category">

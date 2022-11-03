@@ -63,7 +63,7 @@
                             <td>{{$data->collection_date}}</td>
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->last_refuelling_date}}</td>
-                            <td><a class="btn btn-success" href="{{url('/jeep1')}}">read</a></td>
+                            <td><a class="btn btn-success" href="{{url('/jeep1')}}">VDRA</a></td>
                         
 
                         </tr>

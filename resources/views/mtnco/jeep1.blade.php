@@ -77,7 +77,7 @@
             <br>
             <br>
 <ul>
-     <li>        <a class="btn btn-success" href="{{url('/addinfo')}}">ADD Info</a></li>
+     <li>        <a class="btn btn-success" href="{{url('/addinfo')}}">Update VDRA</a></li>
      <br>
      
          <li>   <a class="btn btn-success" href="{{url('/downloadvdra')}}">Download VDRA</a></li>

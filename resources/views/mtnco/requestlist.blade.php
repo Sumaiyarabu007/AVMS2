@@ -18,7 +18,7 @@
 </head>
 <body>
     
-<div class="container-scroller" style="background-color:White" >
+<div class="container-scroller" style="background-color:White;">
     @include("mtnco.navbar")
     <section class="ftco-section">
         <div class="container" style="overflow-x:auto;">
