@@ -9,7 +9,8 @@ use App\Models\User;
 use App\Models\Driverlist;
 use App\Models\Jeeplist;
 use App\Models\Infolist;
-use App\Models\tonlist;
+use App\Models\Tonlist;
+use App\Models\Pickuplist;
 use PDF;
 use Auth;
 
@@ -96,18 +97,47 @@ public function showton()
 }
 //
 
+//pickup  
+public function pickup()
+{
+    $data=user::all();
+    return view("mtnco.pickup",compact("data"));
+}
 
-    public function ton()
-    {
-        $data=user::all();
-        return view("mtnco.ton",compact("data"));
-    }
+public function getpickup()
+{
+    $data=user::all();
+    return view("mtnco.addpickup",compact("data"));
+}
 
-    public function pickup()
-    {
-        $data=user::all();
-        return view("mtnco.pickup",compact("data"));
-    }
+public function uploadpickup(Request $request)
+{
+    $data= new PickupList;
+
+    $data->v_id =  $request->v_id;
+    $data->v_name =$request->v_name;
+    $data->license_number =$request->license_number;
+    $data->authorized_mileage =$request->authorized_mileage;
+    $data->authorized_fuel =$request->authorized_fuel;
+    $data->collection_date =$request->collection_date;
+    $data->last_maintenance_date =$request->last_maintenance_date;
+    $data->last_refuelling_date =$request->last_refuelling_date;
+    $data->save();
+    return redirect() ->back() ;
+}
+
+public function showpickup()
+{
+    $data=pickuplist::all();
+    return view("mtnco.pickup",compact("data"));
+}
+//
+
+
+
+
+   
+   
 
     public function jeep1()
     {
@@ -202,6 +232,12 @@ public function showton()
         return redirect() ->back() ;
     }
 
+    public function showdriver()
+    {
+        $data=driverlist::all();
+        return view("mtnco.drivers",compact("data"));
+    }
+
 //
       
 
@@ -270,6 +306,14 @@ public function showton()
         //return $pdf->download('vdra.pdf');
         return $pdf -> stream();
         
+    }
+
+    public function search()
+    {
+        $search_text= $_GET['query'];
+        $data = Jeeplist::where('id','LIKE','%'.$search_text.'%')->get();
+
+        return view('mtnco.search',compact('data'));
     }
 
    

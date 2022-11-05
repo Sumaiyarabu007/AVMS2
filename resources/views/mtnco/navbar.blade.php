@@ -54,10 +54,7 @@
                 </div>
             </li>
 <br>
-            <form type="get" action="{{url('/search')}}">
-    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White">
-    <button class="btn btn-success" type="submit">Search</button>
-</form>
+           
 
             <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>

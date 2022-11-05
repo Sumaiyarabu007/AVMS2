@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="jquery-3.6.0.min.js"></script>
 
     @include("mtnco.mtncocss")
+  
 
 </head>
 <body>
@@ -20,10 +22,19 @@
 
 <div class="container-scroller" style="background-color:White">
     @include("mtnco.navbar")
-    
+   
     <section class="ftco-section">
+    <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
+    <button class="btn btn-success" type="submit">Search</button>
+    
+</form>
         <div class="container">
             <div class="row justify-content-center">
+                
+                
+<br>
+<br>
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
                     <h2 class="heading-section" style="color:black;">Jeep LIST</h2>
                 </div>
@@ -97,6 +108,29 @@
 <script src="js/main.js"></script>
 
 @include("mtnco.mtncoscript")
+
+<script type="text/javascript">
+
+    $('#search').on('keyup',function()
+    {
+
+     $value=$(this).val();
+
+     $.ajax({
+
+type:'get',
+url:'{{URL::to('search')}}',
+data:{'search': $value},
+     
+success:function(data)
+{
+    console.log(data);
+    $('#Content').html(data);
+
+}
+
+     });
+    })
 
 </body>
 </html>

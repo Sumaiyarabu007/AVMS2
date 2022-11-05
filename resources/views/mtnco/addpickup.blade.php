@@ -91,7 +91,7 @@
 
 <div class="col-lg-6">
 <h6 style="color:black;">Last Refuelling Date</h6>
-    <input type="date" name="last_maintenance_date" value="date-two">
+    <input type="date" name="last_refuelling_date" value="date-three">
 </div>
 <br>
 <br>                      

@@ -52,6 +52,7 @@ Route::get("/drivers",[MtncoController::class,"drivers"]);
 Route::post("/drivers",[MtncoController::class,"uploaddriver"]);
 Route::get("/adddriver",[MtncoController::class,"getdriver"]);
 Route::post("/adddriver",[MtncoController::class,"uploaddriver"]);
+Route::get("/drivers",[MtncoController::class,"showdriver"]);
 //
 
 //jeeplist
@@ -76,6 +77,14 @@ Route::post("/tonlist",[MtncoController::class,"uploadton"]);
 Route::get("/add3ton",[MtncoController::class,"getton"]);
 Route::post("/add3ton",[MtncoController::class,"uploadton"]);
 Route::get("/tonlist",[MtncoController::class,"showton"]);
+//
+
+//pikup
+Route::get("/pickup",[MtncoController::class,"pickup"]);
+Route::post("/pickup",[MtncoController::class,"uploadpickup"]);
+Route::get("/addpickup",[MtncoController::class,"getpickup"]);
+Route::post("/addpickup",[MtncoController::class,"uploadpickup"]);
+Route::get("/pickup",[MtncoController::class,"showpickup"]);
 //
 
 Route::get("/addinfo",[MtncoController::class,"addinfo"]);

@@ -21,6 +21,11 @@
     @include("mtnco.navbar")
     
     <section class="ftco-section">
+    <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
+    <button class="btn btn-success" type="submit">Search</button>
+    
+</form>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
@@ -34,72 +39,42 @@
                             <thead class="thead-dark">
                                 
                             <tr>
-                                <th>Serial</th>
+                            <th>Ser</th>
                                 <th>V_ID</th>
                                 <th>V_Name</th>
-                                <th>License Number</th>
-                                <th>Authorized Mileage</th>
-                                <th>Authorized Fuel</th>
-                                <th>...</th>
+                                <th>License No.</th>
+                                <th>Mileage</th>
+                                <th>Fuel</th>
+                                <th>Collection Date</th>
+                                <th>Last Maint Date</th>
+                                <th>Last Refuelling Date</th>
+                                <th>Read</th>
+                                 
+                                   
                                  
                                    
                     
 
                             </tr>
 
-                            <tr>
-                                <td>1</td>
-                                <td>011022</td>
-                                <td>Pickup1</td>
-                                <td>1234</td>
-                                <td>110km</td>
-                                <td>123l</td>
-                                <td><a href="{{url('/jeep1')}}">Read More</a></td>
+                            @foreach($data as $data)
+                        <tr>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->v_id}}</td>
+                            <td>{{$data->v_name}}</td>
+                         
+                            <td>{{$data->license_number}}</td>
+                            <td>{{$data->authorized_mileage}}</td>
+                            <td>{{$data->authorized_fuel}}</td>
+                            <td>{{$data->collection_date}}</td>
+                            <td>{{$data->last_maintenance_date}}</td>
+                            <td>{{$data->last_refuelling_date}}</td>
+                            <td><a class="btn btn-success" href="{{url('/jeep1')}}">read</a></td>
+                        
 
-                                
-                            </tr>
+                        </tr>
+                        @endforeach
 
-
-                            <tr>
-                                <td>2</td>
-                                <td>031022</td>
-                                <td>Pickup2</td>
-                                <td>5678</td>
-                                <td>60km</td>
-                                <td>123L</td>
-                                <td><a href>Read More</a></td>
-
-                                
-                                
-                            </tr>
-
-
-                            <tr>
-                                <td>3</td>
-                                <td>041022</td>
-                                <td>Pickup3</td>
-                                <td>9023</td>
-                                <td>77km</td>
-                                <td>232L</td>
-                                <td><a href>Read More</a></td>
-                                
-                                
-                            </tr>
-
-
-                            <tr>
-                                <td>4</td>
-                                <td>071022</td>
-                                <td>Pickup4</td>
-                                <td>3475</td>
-                                <td>77km</td>
-                                <td>123L</td>
-                                <td><a href>Read More</a></td>
-
-                                
-                            
-                            </tr>
-                            
                             </thead>
 
 

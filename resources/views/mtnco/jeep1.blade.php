@@ -21,7 +21,12 @@
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
+            <form type="get" action="{{url('/search')}}" method='GET'>
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
+    <button class="btn btn-success" type="submit">Search</button>
+</form>
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
+                
                     <h2 class="heading-section" style="color:black;">Jeep1</h2>
                 </div>
             </div>

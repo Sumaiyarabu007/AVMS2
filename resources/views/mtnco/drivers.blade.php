@@ -24,6 +24,11 @@
 
     
     <section class="ftco-section">
+    <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
+    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Driver" style="background-color:White;">
+    <button class="btn btn-success" type="submit">Search</button>
+    
+</form>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
@@ -37,66 +42,42 @@
                             <thead class="thead-dark">
                                 
                             <tr>
+                            <th>Ser</th>
                             <th>Snk No</th>
                                 <th>Rank</th>
                                 <th>Name</th>
                 
                                 <th>Date of Birth</th>
+                                <th>Moblie number</th>
                                 
                                 <th>License Expire Date</th>
                                 <th>Able to Drive</th>
-                                <th>Experience Yr</th>
-                                <th>Image</th>
+                                <th>Experience Duration</th>
+                                <th>Comment</th>
                                  
                                    
                     
 
                             </tr>
 
-                            <tr>
-                                <td>10548</td>
-                                <td>Cpl</td>
-                                <td>Alamin Islam</td>
-                                <td>20.12.1990</td>
-                                <td>12.03.2017</td>
-                                <td>Jeep, Pick up, 3Ton</td>
-                                <td>5yr</td>
-                                
-                                <td><img src="assets/images/me.jpeg" width="20px"></td>
-                                </div>
+                            @foreach($data as $data)
+                        <tr>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->snk_no}}</td>
+                            <td>{{$data->rank}}</td>
+                         
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->date_of_birth}}</td>
+                            <td>{{$data->mobile_number}}</td>
+                            <td>{{$data->license_expire_date}}</td>
+                            <td>{{$data->able_to_drive}}</td>
+                            <td>{{$data->experience_duration}}</td>
+                            <td>{{$data->comment}}</td>
+                   
+                        
 
-                                
-                            </tr>
-
-
-                            <tr>
-                                <td>10793</td>
-                                <td>Lcpl</td>
-                                <td>Momin Haque</td>
-                                <td>20.04.1995</td>
-                                <td>12.03.2018</td>
-                                <td>Jeep, Pick up</td>
-                                <td>3yr</td>
-                                <td><img src="assets/images/me.jpeg" width="20px"></td>
-
-                                
-                            </tr>
-
-                            <tr>
-                                <td>10997</td>
-                                <td>Snk</td>
-                                <td>Shamim Shikder</td>
-                                <td>15.09.1996</td>
-                                <td>12.03.2020</td>
-                                <td>Jeep</td>
-                                <td>2yr</td>
-                                <td><img src="assets/images/me.jpeg" width="20px"></td>
-
-                                    
-                                
-                            </tr>
-
-                           
+                        </tr>
+                        @endforeach
                             
                             </thead>
 
