@@ -26,7 +26,7 @@
              
             <div class="col-lg-6">
                 <div class="contact-form">
-                <form id="contact" action="/jeeplist" method="post" enctype="multipart/form-data">
+                <form id="contact" action="/pickuplist" method="post" enctype="multipart/form-data">
 
                       @csrf
                       <div class="row">

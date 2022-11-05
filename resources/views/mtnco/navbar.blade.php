@@ -72,7 +72,7 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{url('/jeeplist')}}">Jeep</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{url('/tonlist')}}">3ton</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{url('/pickup')}}">Pickup</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{url('/pickuplist')}}">Pickup</a></li>
                     </ul>
                 </div>
             </li>

@@ -97,11 +97,11 @@ public function showton()
 }
 //
 
-//pickup  
-public function pickup()
+//pickuplist  
+public function pickuplist()
 {
     $data=user::all();
-    return view("mtnco.pickup",compact("data"));
+    return view("mtnco.pickuplist",compact("data"));
 }
 
 public function getpickup()
@@ -129,7 +129,7 @@ public function uploadpickup(Request $request)
 public function showpickup()
 {
     $data=pickuplist::all();
-    return view("mtnco.pickup",compact("data"));
+    return view("mtnco.pickuplist",compact("data"));
 }
 //
 
