@@ -49,6 +49,7 @@
                                  <th>Fuel</th>
                                 <th>Last maint date</th>
                                 <th>Comment</th>
+                                <th>Send</th>
 
                             </tr>
                             </thead>
@@ -70,6 +71,7 @@
                             <td>{{$data->present_fuel}}</td>
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->comment}}</td>
+                            <td><a  class="btn btn-success" href="{{url('/adminrequest')}}">Send</a></td>
 
                         </tr>
                         @endforeach

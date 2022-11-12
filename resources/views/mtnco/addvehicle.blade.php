@@ -20,11 +20,11 @@
 <div class="container-scroller" style="background-color:White">
 
 @include("mtnco.navbar")
-<form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
+<form class="col-lg-2" type="get" action="{{url('/search')}}" method='GET'>
     <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
     <button class="btn btn-success" type="submit">Search</button>
 </form>
-<section class="section" id="reservation" style="position:relative; left:-400px; top:-80px;" >
+<section class="section" id="reservation" style="position:relative; left:-200px; top:-80px;" >
 
 
 <ul>

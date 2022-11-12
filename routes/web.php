@@ -23,10 +23,21 @@ Route::get("/redirects",[HomeController::class,"redirects"]);
 Route::get("/users",[AdminController::class,"user"]);
 Route::get("/adminjeeplist",[AdminController::class,"adminjeeplist"]);
 Route::get("/adminjeep1",[AdminController::class,"adminjeep1"]);
-Route::get("/adminrequest",[AdminController::class,"adminrequest"]);
-Route::get("/adminrequestlist",[AdminController::class,"show"]);
+
 
 Route::get("/deleteuser/{id}",[AdminController::class,"deleteuser"]);
+
+
+//
+Route::get("/adminrequest",[AdminController::class,"adminrequest"]);
+Route::post("/adminlist",[MtncoController::class,"uploadrequest"]);
+Route::get("/adminrequest",[AdminController::class,"getrequest"]);
+Route::post("/editrequest",[AdminController::class,"uploadrequest"]);
+Route::get("/adminrequest",[AdminController::class,"show"]);
+Route::get("/editrequest/{id}",[AdminController::class,"editrequest"]);
+Route::post("/edit/{id}",[AdminController::class,"edit"]);
+//
+
 
 
 Route::get("/jeeplist",[MtncoController::class,"jeeplist"]);
@@ -94,6 +105,10 @@ Route::get("/downloadvdra",[MtncoController::class,"downloadvdra"]);
 
 Route::get("/search",[MtncoController::class,"search"]);
 
+//editinfo
+Route::get("/editinfo/{id}",[MtncoController::class,"editinfo"]);
+Route::post("/edit/{id}",[MtncoController::class,"edit"]);
+//
 
 
 Route::middleware([
