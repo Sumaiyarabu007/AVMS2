@@ -308,13 +308,7 @@ public function showpickup()
         
     }
 
-    public function search()
-    {
-        $search_text= $_GET['query'];
-        $data = Jeeplist::where('id','LIKE','%'.$search_text.'%')->get();
-
-        return view("mtnco.search",compact("data"));
-    }
+   
 
     public function editinfo($id)
     {
@@ -338,6 +332,20 @@ public function showpickup()
 
     }
 
+
+    public function mtncohome()
+    {
+        $data=user::all();
+        return view("mtnco.mtncohome2",compact("data"));
+    }
+   
+
+    public function search(Request $request)
+    {
+        $search=$request->search;
+        $data=jeeplist::where('v_id','Like','%,'.$search.'%')->get();
+        return view("mtnco.jeeplist",compact("data"));
+    }
    
 
     

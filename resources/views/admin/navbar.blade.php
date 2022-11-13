@@ -1,7 +1,7 @@
 
-<div class="container-scroller">
+<div class="container-scroller" style="background-color:White">
     <!-- partial:partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:#092E20">
 
         <ul class="nav">
             <li class="nav-item profile">
@@ -74,14 +74,22 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{url('/adminjeep')}}">Jeep</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{url('/adminton')}}">3ton</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{url('/adminpickup')}}">Pickup</a></li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/forms/basic_elements.html">
+                <a class="nav-link" href="{{url('/addvehicle')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Add Vehicle</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{url('/drivers')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -97,7 +105,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/charts/chartjs.html">
+                <a class="nav-link" href="{{url('/adminrequest')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -108,8 +116,7 @@
         </ul>
 
 
-
-            <!-- partial -->
+        <!-- partial -->
 
     </nav>
 </div>

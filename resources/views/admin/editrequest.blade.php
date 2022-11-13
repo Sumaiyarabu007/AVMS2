@@ -26,7 +26,7 @@
              
             <div class="col-lg-6">
                 <div class="contact-form">
-                <form id="contact" action="{{url('/editrequest', $data->id)}}" method="post" enctype="multipart/form-data">
+                <form id="contact" action="{{url('/editrequest')}}" method="post" enctype="multipart/form-data" >
 
 @csrf                     
 
@@ -162,7 +162,7 @@
                       </div>
                     <br>
                     
-                   
+                    <a  class="btn btn-success" href="{{url('/adminrequest')}}">Go to</a></td>
                 </div>
             </div>
         </div>

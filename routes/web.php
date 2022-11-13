@@ -21,21 +21,27 @@ Route::get("/",[HomeController::class,"index"]);
 Route::get("/redirects",[HomeController::class,"redirects"]);
 
 Route::get("/users",[AdminController::class,"user"]);
-Route::get("/adminjeeplist",[AdminController::class,"adminjeeplist"]);
+Route::get("/adminjeep",[AdminController::class,"adminjeep"]);
+Route::get("/adminjeep",[AdminController::class,"showadminjeep"]);
 Route::get("/adminjeep1",[AdminController::class,"adminjeep1"]);
 
+Route::get("/adminton",[AdminController::class,"adminton"]);
+Route::get("/adminton",[AdminController::class,"showadminton"]);
+
+Route::get("/adminpickup",[AdminController::class,"adminpickup"]);
 
 Route::get("/deleteuser/{id}",[AdminController::class,"deleteuser"]);
 
 
 //
 Route::get("/adminrequest",[AdminController::class,"adminrequest"]);
-Route::post("/adminlist",[MtncoController::class,"uploadrequest"]);
+Route::post("/adminrequest",[MtncoController::class,"uploadrequest"]);
 Route::get("/adminrequest",[AdminController::class,"getrequest"]);
 Route::post("/editrequest",[AdminController::class,"uploadrequest"]);
 Route::get("/adminrequest",[AdminController::class,"show"]);
 Route::get("/editrequest/{id}",[AdminController::class,"editrequest"]);
-Route::post("/edit/{id}",[AdminController::class,"edit"]);
+Route::post("/edit",[AdminController::class,"edit"]);
+Route::get("/deleterequest/{id}",[AdminController::class,"deleterequest"]);
 //
 
 
@@ -110,6 +116,7 @@ Route::get("/editinfo/{id}",[MtncoController::class,"editinfo"]);
 Route::post("/edit/{id}",[MtncoController::class,"edit"]);
 //
 
+Route::get("/mtncohome2",[MtncoController::class,"mtncohome2"]);
 
 Route::middleware([
     'auth:sanctum',

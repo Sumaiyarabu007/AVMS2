@@ -105,7 +105,7 @@
                        
                       </div>
                     </form>
-
+                    <a  class="btn btn-success" href="{{url('/jeeplist')}}">Go to</a></td>
 
                 </div>
             </div>

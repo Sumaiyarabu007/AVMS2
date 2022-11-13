@@ -11,28 +11,25 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    @include("mtnco.mtncocss")
+    @include("admin.admincss")
 
 </head>
 <body>
     
+
 <div class="container-scroller" style="background-color:White">
-    @include("mtnco.navbar")
+    @include("admin.navbar")
+    
     <section class="ftco-section">
-   
     <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
     <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
     <button class="btn btn-success" type="submit">Search</button>
+    
 </form>
-<div class="col-lg-4" style="left:800px;">
-
-</div>
         <div class="container">
             <div class="row justify-content-center">
-           
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
-                
-                    <h2 class="heading-section" style="color:black;">Jeep1</h2>
+                    <h2 class="heading-section" style="color:black;">PICKUP LIST</h2>
                 </div>
             </div>
             <div class="row">
@@ -42,42 +39,42 @@
                             <thead class="thead-dark">
                                 
                             <tr>
-                                <th>Serial</th>
-                                <th>Date</th>
-                                <th>Authority</th>
-                                <th>Destination</th>
-                                <th>KM READING</th>
-                                 <th>When out</th>
-                                 <th>When in</th>
+                            <th>Ser</th>
+                                <th>V_ID</th>
+                                <th>V_Name</th>
+                                <th>License No.</th>
+                                <th>Mileage</th>
+                                <th>Fuel</th>
+                                <th>Collection Date</th>
+                                <th>Last Maint Date</th>
+                                <th>Last Refuelling Date</th>
+                                <th>Read</th>
+                                 
                                    
-                                <th>Present Fuel</th>
-                                <th>Rmks</th>
-                                <th>Edit</th>
-                              
-
+                                 
+                                   
+                    
 
                             </tr>
 
                             @foreach($data as $data)
                         <tr>
-                        <td>{{$data->id}}</td>
-                            <td>{{$data->date}}</td>
-                            <td>{{$data->authority}}</td>
-                            <td>{{$data->destination}}</td>
-                            <td>{{$data->km_reading}}</td>
-                            <td>{{$data->when_out}}</td>
-                            <td>{{$data->when_in}}</td>
-                            
-                            <td>{{$data->present_fuel}}</td>
-                            
-                            <td>{{$data->comment}}</td>
-                            <td><a href="{{url('/editinfo',$data->id) }}" class="btn btn-success">Edit</a></td>
-                           
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->v_id}}</td>
+                            <td>{{$data->v_name}}</td>
+                         
+                            <td>{{$data->license_number}}</td>
+                            <td>{{$data->authorized_mileage}}</td>
+                            <td>{{$data->authorized_fuel}}</td>
+                            <td>{{$data->collection_date}}</td>
+                            <td>{{$data->last_maintenance_date}}</td>
+                            <td>{{$data->last_refuelling_date}}</td>
+                            <td><a class="btn btn-success" href="{{url('/jeep1')}}">read</a></td>
+                        
 
                         </tr>
                         @endforeach
 
-                            
                             </thead>
 
 
@@ -88,15 +85,9 @@
                     </div>
                 </div>
             </div>
-
             <br>
             <br>
-<ul>
-     <li>        <a class="btn btn-success" href="{{url('/addinfo')}}">Update VDRA</a></li>
-     <br>
-     
-         <li>   <a class="btn btn-success" href="{{url('/downloadvdra')}}">Download VDRA</a></li>
-</ul>
+            <a class="btn btn-success" href="{{url('/addpickup')}}">ADD PICKUP</a>
         </div>
     </section>
 </div>
@@ -106,7 +97,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 
-@include("mtnco.mtncoscript")
+@include("admin.adminscript")
 
 </body>
 </html>

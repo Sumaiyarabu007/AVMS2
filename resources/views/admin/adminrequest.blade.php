@@ -49,7 +49,8 @@
                                  <th>Fuel</th>
                                 <th>Last maint date</th>
                                 <th>Comment</th>
-                                <th>Send</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
 
                             </tr>
                             </thead>
@@ -72,7 +73,9 @@
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->comment}}</td>
                             <td><a href="{{url('/editrequest',$data->id) }}" class="btn btn-success">Edit</a></td>
-
+                        
+                            <td><a href="{{url('/deleterequest',$data->id)}}" class="btn btn-success">Delete</a></td>
+                                
                         </tr>
                         @endforeach
 

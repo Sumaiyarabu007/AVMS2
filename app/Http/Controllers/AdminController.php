@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Requestlist;
+use App\Models\Jeeplist;
+use App\Models\Tonlist;
+use App\Models\Pickuplist;
+use App\Models\Driverlist;
 
 
 class AdminController extends Controller
@@ -22,6 +26,41 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->back();
     }
+
+    //adminjeep
+    public function adminjeep()
+    {
+        $data=jeeplist::all();
+        return view("admin.adminjeep",compact("data"));
+    }
+
+    public function showadminjeep()
+    {
+        $data=jeeplist::all();
+        return view("admin.adminjeep",compact("data"));
+    }
+//
+
+//adminton
+public function adminton()
+{
+    $data=user::all();
+    return view("admin.adminton",compact("data"));
+}
+public function showadminton()
+{
+    $data=tonlist::all();
+    return view("admin.adminton",compact("data"));
+}
+//
+
+//
+public function adminpickup()
+{
+    $data=pickuplist::all();
+    return view("admin.adminpickup",compact("data"));
+}//
+
 
     //request
     public function adminrequest()
@@ -70,8 +109,9 @@ class AdminController extends Controller
         return view("admin.editrequest",compact("data"));
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request)
     {
+        $id=$request->id;
         $data= requestlist::find($id);
         $data->date =  $request->date;
         $data->vehicle_type =$request->vehicle_type;
@@ -89,6 +129,13 @@ class AdminController extends Controller
         $data->save();
         return redirect() ->back() ;
 
+    }
+
+    public function deleterequest($id)
+    {
+        $data=requestlist::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 

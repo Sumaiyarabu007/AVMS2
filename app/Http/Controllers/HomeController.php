@@ -24,6 +24,7 @@ class HomeController extends Controller
         {
          return view('mtnco.mtncohome');
         }
+        
     }
 
 }

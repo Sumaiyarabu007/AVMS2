@@ -15,13 +15,13 @@
 
 </head>
 <body>
-<div class="container-scroller">
+<div class="container-scroller" style="background-color:White">
     @include("admin.navbar")
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">MT NCO LIST</h2>
+                <h2 class="heading-section" style="color:black;">USER'S LIST</h2>
             </div>
         </div>
         <div class="row">
