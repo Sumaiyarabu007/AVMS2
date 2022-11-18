@@ -28,15 +28,23 @@ class AdminController extends Controller
     }
 
     //adminjeep
-    public function adminjeep()
+    public function adminjeep(Request $request)
     {
-        $data=jeeplist::all();
+        $data=jeeplist::where(function ($q) use ($request){
+            if(isset($request->v_id)){
+               $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+            }
+        })->get();
         return view("admin.adminjeep",compact("data"));
     }
 
-    public function showadminjeep()
+    public function showadminjeep(Request $request)
     {
-        $data=jeeplist::all();
+        $data=jeeplist::where(function ($q) use ($request){
+            if(isset($request->v_id)){
+               $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+            }
+        })->get();
         return view("admin.adminjeep",compact("data"));
     }
 //
@@ -47,17 +55,25 @@ public function adminton()
     $data=user::all();
     return view("admin.adminton",compact("data"));
 }
-public function showadminton()
+public function showadminton(Request $request)
 {
-    $data=tonlist::all();
+    $data=tonlist::where(function ($q) use ($request){
+        if(isset($request->v_id)){
+           $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+        }
+    })->get();
     return view("admin.adminton",compact("data"));
 }
 //
 
 //
-public function adminpickup()
+public function adminpickup(Request $request)
 {
-    $data=pickuplist::all();
+    $data=pickuplist::where(function ($q) use ($request){
+        if(isset($request->v_id)){
+           $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+        }
+    })->get();
     return view("admin.adminpickup",compact("data"));
 }//
 
@@ -99,8 +115,10 @@ public function adminpickup()
 
     public function show()
     {
-        $data=requestlist::all();
-        return view("admin.adminrequest",compact("data"));
+        $pendingData=requestlist::where('status','pending')->orderBy('id','DESC')->get();
+        $declinedData=requestlist::where('status','declined')->orderBy('id','DESC')->get();
+
+        return view("admin.adminrequest",compact("pendingData",'declinedData'));
     }
 
     public function editrequest($id)
@@ -135,7 +153,36 @@ public function adminpickup()
     {
         $data=requestlist::find($id);
         $data->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success','Request Delete Success');
+    }
+
+    public function approvedRequest($id){
+
+        $statusApproved = Requestlist::find($id);
+        $statusApproved->status = 'approved';
+        $statusApproved->save();
+
+        return back()->with('success','Request Approved Success');
+
+
+    }
+
+    public function declinedRequest($id){
+
+        $statusApproved = Requestlist::find($id);
+        $statusApproved->status = 'declined';
+        $statusApproved->save();
+
+        return back()->with('success','Request Declined Success');
+
+
+    }
+
+    public function adminScheduleList(){
+
+        $scheduleData = Requestlist::where('status','approved')->orderBy('id','DESC')->get();
+
+        return view('admin.schedule',compact('scheduleData'));
     }
 
 

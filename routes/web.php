@@ -42,6 +42,15 @@ Route::get("/adminrequest",[AdminController::class,"show"]);
 Route::get("/editrequest/{id}",[AdminController::class,"editrequest"]);
 Route::post("/edit",[AdminController::class,"edit"]);
 Route::get("/deleterequest/{id}",[AdminController::class,"deleterequest"]);
+
+Route::get("/approved-request/{id}",[AdminController::class,"approvedRequest"]);
+Route::get("/decliend-request/{id}",[AdminController::class,"decliendRequest"]);
+Route::get("/admin-schedule-lists",[AdminController::class,"adminScheduleList"]);
+
+
+
+
+
 //
 
 
@@ -63,6 +72,10 @@ Route::get("/addrequest",[MtncoController::class,"getrequest"]);
 Route::post("/addrequest",[MtncoController::class,"upload"]);
 Route::get("/requestlist",[MtncoController::class,"show"]);
 //
+
+// schedules
+Route::get("/schedule-lists",[MtncoController::class,"scheduleList"]);
+
 
 //driver
 Route::get("/drivers",[MtncoController::class,"drivers"]);

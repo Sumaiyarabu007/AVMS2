@@ -17,22 +17,35 @@
 
 </head>
 <body>
-    
+
 <div class="container-scroller" style="background-color:White;">
     @include("admin.navbar")
     <section class="ftco-section">
         <div class="container" style="overflow-x:auto;">
+
+            @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+             </div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
             <div class="row justify-content-center">
-                <div class="col-lg-6 text-center mb-5" style="top:20px;">
-                    <h2 class="heading-section" style="color:black;">REQUEST LIST</h2>
+                <div class="col-lg-6 text-center mb-5" style="top:20px;  background:yellow">
+                    <h2 class="heading-section" style="color:black;">Pending Request List</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-wrap">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                
+                        <table class="table table-striped">
+                            <thead class="thead-dark" style="background: black">
+
                             <tr>
                             <th>Ser</th>
                                 <th>Date</th>
@@ -43,22 +56,22 @@
                                 <th>Authority</th>
                                 <th>Place</th>
                                 <th>KM</th>
-                        
+
                                  <th>Start Time</th>
                                  <th>End Time</th>
                                  <th>Fuel</th>
                                 <th>Last maint date</th>
                                 <th>Comment</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Approved</th>
+                                <th>Declined</th>
 
                             </tr>
                             </thead>
 
-                            
-                            @foreach($data as $data)
+
+                            @foreach($pendingData as $data)
                         <tr>
-                        <td>{{$data->id}}</td>
+                        <td>{{$loop->iteration}}</td>
                             <td>{{$data->date}}</td>
                             <td>{{$data->vehicle_type}}</td>
                             <td>{{$data->v_id}}</td>
@@ -72,17 +85,12 @@
                             <td>{{$data->present_fuel}}</td>
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->comment}}</td>
-                            <td><a href="{{url('/editrequest',$data->id) }}" class="btn btn-success">Edit</a></td>
-                        
-                            <td><a href="{{url('/deleterequest',$data->id)}}" class="btn btn-success">Delete</a></td>
-                                
+                            <td><a href="{{url('/approved-request',$data->id) }}" class="btn btn-success">Approved</a></td>
+
+                            <td><a href="{{url('/declined-request',$data->id)}}" class="btn btn-danger">Declined</a></td>
+
                         </tr>
                         @endforeach
-
-
-
-
-
 
 
                         </table>
@@ -90,14 +98,89 @@
                 </div>
             </div>
 
+
+
+        </div>
+
+        <br><br><br>
+
+        <div class="container" style="overflow-x:auto;">
+
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center mb-5" style="top:20px; background:red">
+                    <h2 class="heading-section" style="color:#fff;">Declined Request List</h2>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table table-striped">
+                            <thead class="thead-dark" style="background: black">
+
+                            <tr>
+                                <th>Ser</th>
+                                <th>Date</th>
+                                <th>Veh Type</th>
+                                <th>V_ID</th>
+                                <th>Driver</th>
+                                <th>2nd Seater</th>
+                                <th>Authority</th>
+                                <th>Place</th>
+                                <th>KM</th>
+
+                                 <th>Start Time</th>
+                                 <th>End Time</th>
+                                 <th>Fuel</th>
+                                <th>Last maint date</th>
+                                <th>Status</th>
+                                <th>Comment</th>
+
+                            </tr>
+                            </thead>
+                            @foreach ($declinedData as $row)
+
+                                <tr>
+                                    <td style="color:red">{{$loop->iteration}}</td>
+                                    <td style="color:red">{{$row->date}}</td>
+                                    <td style="color:red">{{$row->vehicle_type}}</td>
+                                    <td style="color:red">{{$row->v_id}}</td>
+                                    <td style="color:red">{{$row->drivers_name}}</td>
+                                    <td style="color:red">{{$row->second_seater_name}}</td>
+                                    <td style="color:red">{{$row->authority}}</td>
+                                    <td style="color:red">{{$row->destination}}</td>
+                                    <td style="color:red">{{$row->km_reading}}</td>
+                                    <td style="color:red">{{$row->start_time}}</td>
+                                    <td style="color:red">{{$row->probable_end_time}}</td>
+                                    <td style="color:red">{{$row->present_fuel}}</td>
+                                    <td style="color:red">{{$row->last_maintenance_date}}</td>
+                                    <td  style="color:red">{{$row->status??'N/A'}}</td>
+                                    <td style="color:red">{{$row->comment??'N/A'}}</td>
+                                    {{-- <td>
+                                        <a  class="btn btn-success" href="{{url('/adminrequest')}}">Send</a>
+
+                                    </td> --}}
+
+                                </tr>
+                                @endforeach
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+            {{-- <br>
             <br>
-            <br>
-            
-            
+
+            <a class="btn btn-success" href="{{url('/addrequest')}}">ADD REQUEST</a> --}}
+
+
         </div>
     </section>
 
-    
+
 </div>
 
 <script src="js/jquery.min.js"></script>

@@ -54,7 +54,7 @@
                 </div>
             </li>
 <br>
-           
+
 
             <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>
@@ -102,7 +102,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/tables/basic-table.html">
+                <a class="nav-link" href="{{url('/schedule-lists')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
