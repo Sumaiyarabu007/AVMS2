@@ -44,7 +44,7 @@ Route::post("/edit",[AdminController::class,"edit"]);
 Route::get("/deleterequest/{id}",[AdminController::class,"deleterequest"]);
 
 Route::get("/approved-request/{id}",[AdminController::class,"approvedRequest"]);
-Route::get("/decliend-request/{id}",[AdminController::class,"decliendRequest"]);
+Route::get("/declined-request/{id}",[AdminController::class,"declinedRequest"]);
 Route::get("/admin-schedule-lists",[AdminController::class,"adminScheduleList"]);
 
 
