@@ -48,8 +48,13 @@ Route::get("/declined-request/{id}",[AdminController::class,"declinedRequest"]);
 Route::get("/admin-schedule-lists",[AdminController::class,"adminScheduleList"]);
 
 
+//
+// Predictions
+Route::get("/admin-predictions",[AdminController::class,"predictions"]);
 
 
+
+Route::get("/admin-drivers",[AdminController::class,"adminDriverList"]);
 
 //
 
@@ -72,6 +77,9 @@ Route::get("/addrequest",[MtncoController::class,"getrequest"]);
 Route::post("/addrequest",[MtncoController::class,"upload"]);
 Route::get("/requestlist",[MtncoController::class,"show"]);
 //
+
+// Predictions
+Route::get("/predictions",[MtncoController::class,"predictions"]);
 
 // schedules
 Route::get("/schedule-lists",[MtncoController::class,"scheduleList"]);

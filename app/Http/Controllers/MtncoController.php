@@ -246,9 +246,17 @@ public function showpickup(Request $request)
         return redirect() ->back() ;
     }
 
-    public function showdriver()
+    public function showdriver(Request $request)
     {
-        $data=driverlist::all();
+        $data=driverlist::where(function ($q) use ($request){
+
+            if(isset($request->search_value)){
+                $q->where('snk_no','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('rank','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('name','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('mobile_number','LIKE', '%' . $request->search_value. '%');
+            }
+        })->get();
         return view("mtnco.drivers",compact("data"));
     }
 
@@ -369,6 +377,10 @@ public function showpickup(Request $request)
         $scheduleData = Requestlist::where('status','approved')->orderBy('id','DESC')->get();
 
         return view('mtnco.schedule',compact('scheduleData'));
+    }
+
+    public function predictions(){
+        return view('mtnco.predictions');
     }
 
 

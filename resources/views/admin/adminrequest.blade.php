@@ -62,8 +62,8 @@
                                  <th>Fuel</th>
                                 <th>Last maint date</th>
                                 <th>Comment</th>
-                                <th>Approved</th>
-                                <th>Declined</th>
+                                <th>Approve</th>
+                                <th>Decline</th>
 
                             </tr>
                             </thead>
@@ -85,9 +85,9 @@
                             <td>{{$data->present_fuel}}</td>
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->comment}}</td>
-                            <td><a href="{{url('/approved-request',$data->id) }}" class="btn btn-success">Approved</a></td>
+                            <td><a href="{{url('/approved-request',$data->id) }}" class="btn btn-success">Approve</a></td>
 
-                            <td><a href="{{url('/declined-request',$data->id)}}" class="btn btn-danger">Declined</a></td>
+                            <td><a href="{{url('/declined-request',$data->id)}}" class="btn btn-danger">Decline</a></td>
 
                         </tr>
                         @endforeach

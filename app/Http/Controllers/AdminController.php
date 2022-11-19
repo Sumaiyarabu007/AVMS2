@@ -185,5 +185,24 @@ public function adminpickup(Request $request)
         return view('admin.schedule',compact('scheduleData'));
     }
 
+    public function predictions(){
+
+        return view('admin.predictions');
+    }
+
+    public function adminDriverList(Request $request)
+    {
+        $data=driverlist::where(function ($q) use ($request){
+
+            if(isset($request->search_value)){
+                $q->where('snk_no','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('rank','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('name','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('mobile_number','LIKE', '%' . $request->search_value. '%');
+            }
+        })->get();
+        return view("admin.drivers",compact("data"));
+    }
+
 
 }

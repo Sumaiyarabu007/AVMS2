@@ -89,7 +89,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{url('/drivers')}}">
+                <a class="nav-link" href="{{url('/admin-drivers')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -110,6 +110,15 @@
                 <i class="mdi mdi-chart-bar"></i>
               </span>
                     <span class="menu-title">Request</span>
+                </a>
+            </li>
+
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{url('/admin-predictions')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+                    <span class="menu-title">Predictions</span>
                 </a>
             </li>
 

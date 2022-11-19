@@ -13,14 +13,14 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    @include("mtnco.mtncocss")
+    @include("admin.admincss")
 
 </head>
 <body>
 
 
 <div class="container-scroller" style="background-color:White">
-    @include("mtnco.navbar")
+    @include("admin.navbar")
 
 
     <section class="ftco-section">
@@ -89,9 +89,9 @@
                     </div>
                 </div>
             </div>
+            {{-- <br>
             <br>
-            <br>
-            <a class="btn btn-success" href="{{url('/adddriver')}}">ADD Driver</a>
+            <a class="btn btn-success" href="{{url('/adddriver')}}">ADD Driver</a> --}}
 
 
         </div>

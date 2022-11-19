@@ -39,9 +39,9 @@
                 <div class="col-lg-6 text-center mb-5" style="top:20px; background:yellow">
                     <h2 class="heading-section" style="color:black;">Pending Request List</h2>
                 </div>
-                <div class="col-lg-6 text-center mb-5" style="top:20px;">
+                {{-- <div class="col-lg-6 text-center mb-5" style="top:20px;">
                     <a class="btn btn-success" href="{{url('/addrequest')}}">ADD REQUEST</a>
-                </div>
+                </div> --}}
 
             </div>
             <div class="row">
@@ -104,13 +104,14 @@
                 </div>
             </div>
 
-            {{-- <br>
-            <br>
 
-            <a class="btn btn-success" href="{{url('/addrequest')}}">ADD REQUEST</a> --}}
 
 
         </div>
+        <br>
+        <br>
+
+        <a class="btn btn-success" href="{{url('/addrequest')}}">ADD REQUEST</a>
         <br><br><br>
 
         <div class="container" style="overflow-x:auto;">
