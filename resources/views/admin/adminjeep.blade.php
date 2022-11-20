@@ -14,25 +14,25 @@
     <script src="jquery-3.6.0.min.js"></script>
 
     @include("admin.admincss")
-  
+
 
 </head>
 <body>
-    
+
 
 <div class="container-scroller" style="background-color:White">
     @include("admin.navbar")
-   
+
     <section class="ftco-section">
-    <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
-    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Vehicle" style="background-color:White;">
+    <form class="col-lg-4" type="get" action="" method='GET'>
+    <input class="form-control mr-sm-2" name="v_id" type="search" placeholder="Search Vehicle" style="background-color:White;">
     <button class="btn btn-success" type="submit">Search</button>
-    
+
 </form>
         <div class="container">
             <div class="row justify-content-center">
-                
-                
+
+
 <br>
 <br>
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
@@ -44,7 +44,7 @@
                     <div class="table-wrap">
                         <table class="table">
                             <thead class="thead-dark">
-                                
+
                             <tr>
                                 <th>Ser</th>
                                 <th>V_ID</th>
@@ -56,9 +56,9 @@
                                 <th>Last Maint Date</th>
                                 <th>Last Refuelling Date</th>
                                 <th>Read</th>
-                                 
-                                   
-                    
+
+
+
 
                             </tr>
 
@@ -67,7 +67,7 @@
                             <td>{{$data->id}}</td>
                             <td>{{$data->v_id}}</td>
                             <td>{{$data->v_name}}</td>
-                         
+
                             <td>{{$data->license_number}}</td>
                             <td>{{$data->authorized_mileage}}</td>
                             <td>{{$data->authorized_fuel}}</td>
@@ -75,14 +75,14 @@
                             <td>{{$data->last_maintenance_date}}</td>
                             <td>{{$data->last_refuelling_date}}</td>
                             <td><a class="btn btn-success" href="{{url('/jeep1')}}">VDRA</a></td>
-                        
+
 
                         </tr>
                         @endforeach
 
 
 
-                            
+
                             </thead>
 
 
@@ -95,8 +95,8 @@
             </div>
             <br>
             <br>
-           
-            
+
+
 
         </div>
     </section>
@@ -121,7 +121,7 @@
 type:'get',
 url:'{{URL::to('search')}}',
 data:{'search': $value},
-     
+
 success:function(data)
 {
     console.log(data);

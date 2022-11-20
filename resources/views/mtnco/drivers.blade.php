@@ -17,17 +17,17 @@
 
 </head>
 <body>
-    
+
 
 <div class="container-scroller" style="background-color:White">
     @include("mtnco.navbar")
 
-    
+
     <section class="ftco-section">
-    <form class="col-lg-4" type="get" action="{{url('/search')}}" method='GET'>
-    <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search Driver" style="background-color:White;">
+    <form class="col-lg-4" type="get" action="" method='GET'>
+    <input class="form-control mr-sm-2" name="search_value" type="search" placeholder="Search Driver" style="background-color:White;">
     <button class="btn btn-success" type="submit">Search</button>
-    
+
 </form>
         <div class="container">
             <div class="row justify-content-center">
@@ -40,23 +40,23 @@
                     <div class="table-wrap">
                         <table class="table">
                             <thead class="thead-dark">
-                                
+
                             <tr>
                             <th>Ser</th>
                             <th>Snk No</th>
                                 <th>Rank</th>
                                 <th>Name</th>
-                
+
                                 <th>Date of Birth</th>
                                 <th>Moblie number</th>
-                                
+
                                 <th>License Expire Date</th>
                                 <th>Able to Drive</th>
                                 <th>Experience Duration</th>
                                 <th>Comment</th>
-                                 
-                                   
-                    
+
+
+
 
                             </tr>
 
@@ -65,7 +65,7 @@
                             <td>{{$data->id}}</td>
                             <td>{{$data->snk_no}}</td>
                             <td>{{$data->rank}}</td>
-                         
+
                             <td>{{$data->name}}</td>
                             <td>{{$data->date_of_birth}}</td>
                             <td>{{$data->mobile_number}}</td>
@@ -73,12 +73,12 @@
                             <td>{{$data->able_to_drive}}</td>
                             <td>{{$data->experience_duration}}</td>
                             <td>{{$data->comment}}</td>
-                   
-                        
+
+
 
                         </tr>
                         @endforeach
-                            
+
                             </thead>
 
 
@@ -92,7 +92,7 @@
             <br>
             <br>
             <a class="btn btn-success" href="{{url('/adddriver')}}">ADD Driver</a>
-            
+
 
         </div>
     </section>

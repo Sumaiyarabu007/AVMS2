@@ -1,7 +1,9 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
-    <title>3TON LIST</title>
+    <title>Drivers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,25 +13,26 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    @include("mtnco.mtncocss")
+    @include("admin.admincss")
 
 </head>
 <body>
 
 
 <div class="container-scroller" style="background-color:White">
-    @include("mtnco.navbar")
+    @include("admin.navbar")
+
 
     <section class="ftco-section">
     <form class="col-lg-4" type="get" action="" method='GET'>
-    <input class="form-control mr-sm-2" name="v_id" type="search" placeholder="Search Vehicle" style="background-color:White;">
+    <input class="form-control mr-sm-2" name="search_value" type="search" placeholder="Search Driver" style="background-color:White;">
     <button class="btn btn-success" type="submit">Search</button>
 
 </form>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5" style="top:20px;">
-                    <h2 class="heading-section" style="color:black;">3TON LIST</h2>
+                    <h2 class="heading-section" style="color:black;">DRIVERS LIST</h2>
                 </div>
             </div>
             <div class="row">
@@ -40,41 +43,43 @@
 
                             <tr>
                             <th>Ser</th>
-                                <th>V_ID</th>
-                                <th>V_Name</th>
-                                <th>License No.</th>
-                                <th>Mileage</th>
-                                <th>Fuel</th>
-                                <th>Collection Date</th>
-                                <th>Last Maint Date</th>
-                                <th>Last Refuelling Date</th>
-                                <th>Read</th>
+                            <th>Snk No</th>
+                                <th>Rank</th>
+                                <th>Name</th>
+
+                                <th>Date of Birth</th>
+                                <th>Moblie number</th>
+
+                                <th>License Expire Date</th>
+                                <th>Able to Drive</th>
+                                <th>Experience Duration</th>
+                                <th>Comment</th>
 
 
 
 
                             </tr>
 
-
                             @foreach($data as $data)
                         <tr>
                             <td>{{$data->id}}</td>
-                            <td>{{$data->v_id}}</td>
-                            <td>{{$data->v_name}}</td>
+                            <td>{{$data->snk_no}}</td>
+                            <td>{{$data->rank}}</td>
 
-                            <td>{{$data->license_number}}</td>
-                            <td>{{$data->authorized_mileage}}</td>
-                            <td>{{$data->authorized_fuel}}</td>
-                            <td>{{$data->collection_date}}</td>
-                            <td>{{$data->last_maintenance_date}}</td>
-                            <td>{{$data->last_refuelling_date}}</td>
-                            <td><a class="btn btn-success" href="{{url('/jeep1')}}">read</a></td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->date_of_birth}}</td>
+                            <td>{{$data->mobile_number}}</td>
+                            <td>{{$data->license_expire_date}}</td>
+                            <td>{{$data->able_to_drive}}</td>
+                            <td>{{$data->experience_duration}}</td>
+                            <td>{{$data->comment}}</td>
+
 
 
                         </tr>
                         @endforeach
 
-                                                       </thead>
+                            </thead>
 
 
 
@@ -84,11 +89,11 @@
                     </div>
                 </div>
             </div>
+            {{-- <br>
             <br>
-            <br>
-            <div class="container">
-            <a class="btn btn-success" href="{{url('/add3ton')}}">ADD 3TON</a>
-            </div>
+            <a class="btn btn-success" href="{{url('/adddriver')}}">ADD Driver</a> --}}
+
+
         </div>
     </section>
 </div>

@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 class MtncoController extends Controller
 {
 
- //jeeplist   
+ //jeeplist
     public function jeeplist()
     {
         $data=user::all();
@@ -52,16 +52,22 @@ class MtncoController extends Controller
         return redirect() ->back() ;
     }
 
-    public function showjeep()
+    public function showjeep(Request $request)
     {
-        $data=jeeplist::all();
+        // return $request;
+        $data=jeeplist::where(function ($q) use ($request){
+            if(isset($request->v_id)){
+               $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+            }
+        })->get();
+
         return view("mtnco.jeeplist",compact("data"));
     }
 
 
 //
 
-//tonlist   
+//tonlist
 public function tonlist()
 {
     $data=user::all();
@@ -90,14 +96,18 @@ public function uploadton(Request $request)
     return redirect() ->back() ;
 }
 
-public function showton()
+public function showton(Request $request)
 {
-    $data=tonlist::all();
+    $data=tonlist::where(function ($q) use ($request){
+        if(isset($request->v_id)){
+           $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+        }
+    })->get();
     return view("mtnco.tonlist",compact("data"));
 }
 //
 
-//pickuplist  
+//pickuplist
 public function pickuplist()
 {
     $data=user::all();
@@ -126,9 +136,13 @@ public function uploadpickup(Request $request)
     return redirect() ->back() ;
 }
 
-public function showpickup()
+public function showpickup(Request $request)
 {
-    $data=pickuplist::all();
+    $data=pickuplist::where(function ($q) use ($request){
+        if(isset($request->v_id)){
+           $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+        }
+    })->get();
     return view("mtnco.pickuplist",compact("data"));
 }
 //
@@ -136,8 +150,8 @@ public function showpickup()
 
 
 
-   
-   
+
+
 
     public function jeep1()
     {
@@ -201,7 +215,7 @@ public function showpickup()
 
  //
 
- //drivers   
+ //drivers
 
     public function drivers()
     {
@@ -232,14 +246,22 @@ public function showpickup()
         return redirect() ->back() ;
     }
 
-    public function showdriver()
+    public function showdriver(Request $request)
     {
-        $data=driverlist::all();
+        $data=driverlist::where(function ($q) use ($request){
+
+            if(isset($request->search_value)){
+                $q->where('snk_no','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('rank','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('name','LIKE', '%' . $request->search_value. '%');
+                $q->orWhere('mobile_number','LIKE', '%' . $request->search_value. '%');
+            }
+        })->get();
         return view("mtnco.drivers",compact("data"));
     }
 
 //
-      
+
 
 //requestlist
 
@@ -272,14 +294,17 @@ public function showpickup()
         $data->last_maintenance_date =$request->last_maintenance_date;
         $data->comment =$request->comment;
         $data->present_fuel = $request->fuel;
+        $data->status = 'pending';
         $data->save();
-        return redirect() ->back() ;
+        return redirect() ->back()->with('success','Request Addedd Success') ;
     }
 
     public function show()
     {
-        $data=requestlist::all();
-        return view("mtnco.requestlist",compact("data"));
+        $pendingData=requestlist::where('status','pending')->orderBy('id','DESC')->get();
+        $declinedData=requestlist::where('status','declined')->orderBy('id','DESC')->get();
+
+        return view("mtnco.requestlist",compact('pendingData','declinedData'));
     }
 
 //
@@ -305,10 +330,10 @@ public function showpickup()
         ]);
         //return $pdf->download('vdra.pdf');
         return $pdf -> stream();
-        
+
     }
 
-   
+
 
     public function editinfo($id)
     {
@@ -338,38 +363,27 @@ public function showpickup()
         $data=user::all();
         return view("mtnco.mtncohome2",compact("data"));
     }
-   
+
 
     public function search(Request $request)
     {
-        $search=$request->search;
+        $search=$request->query;
         $data=jeeplist::where('v_id','Like','%,'.$search.'%')->get();
         return view("mtnco.jeeplist",compact("data"));
     }
-   
 
-    
+    public function scheduleList(){
 
+        $scheduleData = Requestlist::where('status','approved')->orderBy('id','DESC')->get();
 
+        return view('mtnco.schedule',compact('scheduleData'));
+    }
 
-    
-    
-    
-        
-  
-    
-   
-   
-        
-    
+    public function predictions(){
+        return view('mtnco.predictions');
+    }
 
 
-   
 
-     
-     
 
-   
-
-    
 }
