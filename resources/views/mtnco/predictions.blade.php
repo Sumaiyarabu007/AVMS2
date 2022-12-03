@@ -35,15 +35,127 @@
                 </div>
             @endif
 
-            <div class="row justify-content-center">
-                {{-- <div class="col-lg-6 text-center mb-5" style="top:20px; background:rgb(14, 247, 6)">
-                </div> --}}
+            <div class="row col-sm-12 justify-content-center">
 
-                <h2 class="heading-section" style="color:black;  background:rgb(14, 247, 6)">Predictions</h2>
+                <h1 class="p-3 mb-2 bg-success text-white"> Prediction</h1>
+                <div class="row col-sm-12 shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="col-sm-6 shadow-lg p-3 mb-5 bg-white rounded">
+                      <div class="card" style="background: rgba(233, 227, 227, 0.842)">
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h5 class="text-black">Fule Consumption/L</h5>
+
+                            </div>
+                            <table class="table table-bordered text-black">
+                                <tr>
+                                    <th>S.I</th>
+                                    <th>Name</th>
+                                    <th>mailage</th>
+
+                                </tr>
+                                @foreach ($getJeepLists as $row)
+
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$row->v_name}}</td>
+                                    <td>{{$milagePerLiter = App\Models\VdraRecord::milage_per_liter($row->id)}}</td>
+
+                                </tr>
+
+                                @endforeach
+
+                            </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card" style="background: rgba(233, 227, 227, 0.842)">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  <h5 class="text-black">Monthly Used</h5>
+
+                              </div>
+                              <table class="table table-bordered text-black">
+                                  <tr>
+                                      <th>S.I</th>
+                                      <th>Name</th>
+                                      <th>KM</th>
+                                  </tr>
+
+                                  @foreach ($monthlyUsed as $item)
+
+                                  <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$item->v_name??''}}</td>
+                                    <td>{{intval($item->total_km??0)}}</td>
+                                  </tr>
+                                  @endforeach
+
+                              </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card" style="background: rgba(233, 227, 227, 0.842)">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  <h5 class="text-black">Maintenace</h5>
+
+                              </div>
+                              <table class="table table-bordered text-black">
+                                  <tr>
+                                      <th>S.I</th>
+                                      <th>Name</th>
+                                      <th>Date</th>
+                                  </tr>
+
+                                  @foreach ($getJeepLists as $list)
+
+                                  <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$list->v_name??''}}</td>
+                                    <td>{{$maintanceDate = App\Models\VdraRecord::maintenance_date_prediction($list->id)}}</td>
+                                  </tr>
+                                  @endforeach
+
+                              </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card" style="background: rgba(233, 227, 227, 0.842)">
+                          <div class="card-body">
+                              <div class="card-header">
+                                  <h5 class="text-black">Refueling</h5>
+
+                              </div>
+                              <table class="table table-bordered text-black">
+                                  <tr>
+                                      <th>S.I</th>
+                                      <th>Name</th>
+                                      <th>Date</th>
+                                  </tr>
+
+                                  @foreach ($getJeepLists as $r)
+
+                                  <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$r->v_name??''}}</td>
+                                    <td>{{$refuelingDate = App\Models\VdraRecord::refueling_date_prediction($r->id)}}</td>
+                                  </tr>
+                                  @endforeach
+
+                              </table>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
 
             </div>
-
-
 
 
         </div>
