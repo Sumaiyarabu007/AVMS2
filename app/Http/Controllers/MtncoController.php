@@ -11,6 +11,9 @@ use App\Models\Jeeplist;
 use App\Models\Infolist;
 use App\Models\Tonlist;
 use App\Models\Pickuplist;
+use App\Models\SheduleRequest;
+use App\Models\VdraRecord;
+use App\Models\Vehicle;
 use PDF;
 use Auth;
 
@@ -18,16 +21,65 @@ use Auth;
 
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class MtncoController extends Controller
 {
+
+    //Vehical
+
+    public function vehicleList(Request $request, $type){
+
+        $data = Vehicle::where('v_type',$type)
+        ->where(function ($q) use ($request){
+            if(isset($request->v_id)){
+               $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
+            }
+        })->get();
+
+        if($type=='jeep'){
+            return view('mtnco.jeeplist',compact('data'));
+        }elseif($type=='3ton'){
+            return view('mtnco.tonlist',compact('data'));
+
+        }elseif($type=='pickup'){
+
+            return view('mtnco.pickuplist',compact('data'));
+
+        }else{
+            return redirect()->back();
+        }
+
+
+    }
+
+    //add vehicel
+
+    public function vehicleAdd($type){
+
+        if($type=='jeep'){
+            $data=user::all();
+            return view("mtnco.addjeep",compact("data"));
+        }elseif($type=='3ton'){
+            $data=user::all();
+            return view("mtnco.addton",compact("data"));
+
+        }elseif($type=='pickup'){
+
+            $data=user::all();
+            return view("mtnco.addpickup",compact("data"));
+
+        }else{
+            return redirect()->back();
+        }
+
+    }
 
  //jeeplist
     public function jeeplist()
     {
         $data=user::all();
-        return view("mtnco.jeeplist",compact("data"));
+        return view("mtnco.jeep3list",compact("data"));
     }
 
     public function getjeep()
@@ -38,16 +90,22 @@ class MtncoController extends Controller
 
     public function uploadjeep(Request $request)
     {
-        $data= new JeepList;
+        $data= new Vehicle;
 
         $data->v_id =  $request->v_id;
         $data->v_name =$request->v_name;
+        $data->v_type ='jeep';
+        $data->status ='active';
         $data->license_number =$request->license_number;
         $data->authorized_mileage =$request->authorized_mileage;
         $data->authorized_fuel =$request->authorized_fuel;
         $data->collection_date =$request->collection_date;
         $data->last_maintenance_date =$request->last_maintenance_date;
         $data->last_refuelling_date =$request->last_refuelling_date;
+        $data->next_maintenance_date = $request->next_maintenance_date;
+        $data->maintenance_km_limit = $request->maintenance_km_limit;
+        $data->refuling_limit = $request->refuling_limit;
+
         $data->save();
         return redirect() ->back() ;
     }
@@ -55,7 +113,7 @@ class MtncoController extends Controller
     public function showjeep(Request $request)
     {
         // return $request;
-        $data=jeeplist::where(function ($q) use ($request){
+        $data=Vehicle::where('v_type','jeep')->where(function ($q) use ($request){
             if(isset($request->v_id)){
                $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
             }
@@ -82,23 +140,30 @@ public function getton()
 
 public function uploadton(Request $request)
 {
-    $data= new TonList;
+    $data= new Vehicle;
 
     $data->v_id =  $request->v_id;
     $data->v_name =$request->v_name;
+    $data->v_type ='3ton';
+    $data->status ='active';
     $data->license_number =$request->license_number;
     $data->authorized_mileage =$request->authorized_mileage;
     $data->authorized_fuel =$request->authorized_fuel;
     $data->collection_date =$request->collection_date;
     $data->last_maintenance_date =$request->last_maintenance_date;
     $data->last_refuelling_date =$request->last_refuelling_date;
+    $data->next_maintenance_date = $request->next_maintenance_date;
+        $data->maintenance_km_limit = $request->maintenance_km_limit;
+        $data->refuling_limit = $request->refuling_limit;
+
+
     $data->save();
     return redirect() ->back() ;
 }
 
 public function showton(Request $request)
 {
-    $data=tonlist::where(function ($q) use ($request){
+    $data=Vehicle::where('v_type','3ton')->where(function ($q) use ($request){
         if(isset($request->v_id)){
            $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
         }
@@ -122,23 +187,28 @@ public function getpickup()
 
 public function uploadpickup(Request $request)
 {
-    $data= new PickupList;
+    $data= new Vehicle;
 
     $data->v_id =  $request->v_id;
     $data->v_name =$request->v_name;
+    $data->v_type ='pickup';
+    $data->status ='active';
     $data->license_number =$request->license_number;
     $data->authorized_mileage =$request->authorized_mileage;
     $data->authorized_fuel =$request->authorized_fuel;
     $data->collection_date =$request->collection_date;
     $data->last_maintenance_date =$request->last_maintenance_date;
-    $data->last_refuelling_date =$request->last_refuelling_date;
+    $data->last_refuelling_date = $request->last_refuelling_date;
+    $data->next_maintenance_date = $request->next_maintenance_date;
+    $data->maintenance_km_limit = $request->maintenance_km_limit;
+    $data->refuling_limit = $request->refuling_limit;
     $data->save();
     return redirect() ->back() ;
 }
 
 public function showpickup(Request $request)
 {
-    $data=pickuplist::where(function ($q) use ($request){
+    $data=Vehicle::where('v_type','pickup')->where(function ($q) use ($request){
         if(isset($request->v_id)){
            $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
         }
@@ -274,26 +344,33 @@ public function showpickup(Request $request)
     public function getrequest()
     {
         $data=user::all();
-        return view("mtnco.addrequest",compact("data"));
+        $vhecleList = Vehicle::all();
+        $driverList = Driverlist::all();
+        return view("mtnco.addrequest",compact("data","vhecleList","driverList"));
     }
 
     public function upload(Request $request)
     {
-        $data= new RequestList;
+
+        $vehicleDetails = Vehicle::where('id',$request->vehicle_id)->first();
+
+
+        // return $request;
+        $data= new SheduleRequest();
 
         $data->date =  $request->date;
-        $data->vehicle_type =$request->vehicle_type;
-        $data->v_id =$request->v_id;
-        $data->drivers_name =$request->drivers_name;
+        $data->vehicle_id =$request->vehicle_id;
+        $data->driver_id =$request->driver_id;
         $data->second_seater_name =$request->second_seater_name;
         $data->authority =$request->authority;
         $data->destination =$request->destination;
-        $data->km_reading =$request->km_reading;
+        $data->present_mileage	 =$vehicleDetails->authorized_mileage;
+        $data->km_reading	 =$vehicleDetails->authorized_mileage;
         $data->start_time =$request->start_time;
         $data->probable_end_time =$request->probable_end_time;
-        $data->last_maintenance_date =$request->last_maintenance_date;
+        // $data->last_maintenance_date =$request->last_maintenance_date;
         $data->comment =$request->comment;
-        $data->present_fuel = $request->fuel;
+        $data->present_fuel = $vehicleDetails->authorized_fuel;
         $data->status = 'pending';
         $data->save();
         return redirect() ->back()->with('success','Request Addedd Success') ;
@@ -301,8 +378,8 @@ public function showpickup(Request $request)
 
     public function show()
     {
-        $pendingData=requestlist::where('status','pending')->orderBy('id','DESC')->get();
-        $declinedData=requestlist::where('status','declined')->orderBy('id','DESC')->get();
+        $pendingData=SheduleRequest::with('vehicle')->where('status','pending')->orderBy('id','DESC')->get();
+        $declinedData=SheduleRequest::with('vehicle')->where('status','declined')->orderBy('id','DESC')->get();
 
         return view("mtnco.requestlist",compact('pendingData','declinedData'));
     }
@@ -374,14 +451,99 @@ public function showpickup(Request $request)
 
     public function scheduleList(){
 
-        $scheduleData = Requestlist::where('status','approved')->orderBy('id','DESC')->get();
+
+        $scheduleData = SheduleRequest::with('vehicle')->where('status','approved')->orderBy('id','DESC')->get();
 
         return view('mtnco.schedule',compact('scheduleData'));
     }
 
     public function predictions(){
-        return view('mtnco.predictions');
+
+        $startDate = date('Y-m-01');
+        $endDate = date('Y-m-t');
+
+        $getJeepLists = Vehicle::all();
+
+        // ->get();
+
+        $monthlyUsed =  Vehicle::select('vehicles.*','vdra_records.date_vdra', DB::raw('SUM(shedule_km_ride_vdra) as total_km'))
+        ->join('vdra_records', 'vehicles.id', '=', 'vdra_records.vehicle_id_vdra')
+        ->where(DB::raw('date(vdra_records.date_vdra)'),'>=',$startDate)
+        ->where(DB::raw('date(vdra_records.date_vdra)'),'<=',$endDate)
+        ->groupBy('vehicles.id','vdra_records.date_vdra')
+        ->orderBy('total_km','desc')
+        ->get();
+
+
+        // return $getJeepLists;
+        return view('mtnco.predictions',compact('monthlyUsed','getJeepLists'));
     }
+
+
+    public function vdraRecordAdd($id){
+
+        $data=user::all();
+
+        $row = SheduleRequest::find($id);
+
+        return view('mtnco.addvdrar',compact('row','data'));
+
+
+
+    }
+
+    public function addVdraRecordStore(Request $request,$id){
+
+        // $request;
+
+
+       $sheduleDetails = SheduleRequest::find($id);
+       $vehicleDetails = Vehicle::find($sheduleDetails->vehicle_id);
+
+       $shedule_km_ride_vdra = ($request->km_reading_vdra - $vehicleDetails->authorized_mileage);
+       $shedule_fuel_spend_vdra = ($vehicleDetails->authorized_fuel - $request->present_fuel_vdra );
+
+
+
+        // return $request;
+        $data= new VdraRecord();
+
+        $data->date_vdra =  $sheduleDetails->date;
+        $data->vehicle_id_vdra = $sheduleDetails->vehicle_id;
+        $data->shedule_id_vdra = $id;
+        $data->when_check_in_vdra = $request->when_check_in_vdra;
+        $data->when_check_out_vdra = $request->when_check_out_vdra;
+        $data->km_reading_vdra = $request->km_reading_vdra;
+        $data->present_fuel_vdra = $request->present_fuel_vdra;
+        $data->shedule_km_ride_vdra = $shedule_km_ride_vdra??0;
+        $data->shedule_fuel_spend_vdra =  $shedule_fuel_spend_vdra??0;
+        $data->status = 'good';
+        $data->save();
+
+        $updateVehicleData = Vehicle::find($sheduleDetails->vehicle_id);
+        $updateVehicleData->authorized_mileage = $request->km_reading_vdra;
+        $updateVehicleData->authorized_fuel = $request->present_fuel_vdra;
+        $updateVehicleData->save();
+
+        return redirect() ->back()->with('success','VDRA Addedd Success') ;
+
+    }
+
+
+    public function updateVehicle(Request $request,$id){
+
+        $update = Vehicle::find($id);
+        $update->last_maintenance_date = $request->last_maintenance_date;
+        $update->last_refuelling_date = $request->last_refuelling_date;
+        $update->next_maintenance_date = $request->next_maintenance_date;
+        $update->save();
+
+        return redirect()->back();
+
+
+    }
+
+
 
 
 

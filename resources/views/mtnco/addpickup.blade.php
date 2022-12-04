@@ -15,15 +15,15 @@
 
 </head>
 <body>
-    
+
 <div class="container-scroller" style="background-color:White" >
     @include("mtnco.navbar")
-    
+
     <!-- ***** Reservation Us Area Starts ***** -->
 <section class="section" id="reservation" style="position:relative; left:80px; top:-200px;" >
     <div class="container">
         <div class="row">
-             
+
             <div class="col-lg-6">
                 <div class="contact-form">
                 <form id="contact" action="/pickuplist" method="post" enctype="multipart/form-data">
@@ -35,8 +35,8 @@
                         </div>
 
 
-                        
-                        
+
+
 
                         <div class="col-lg-6 col-sm-12">
                         <h6 style="color:black;">V_ID</h6>
@@ -59,14 +59,14 @@
                           </fieldset>
                         </div>
 
-                       
+
 
                         <div class="col-lg-6 col-sm-12">
                         <h6 style="color:black;">Authorized Mileage</h6>
                           <fieldset>
                           <input name="authorized_mileage" type="distance" id="distance" placeholder="" required="">
                         </fieldset>
-                        
+
                         </div>
 
                         <div class="col-lg-6 col-sm-12">
@@ -74,10 +74,10 @@
                           <fieldset>
                           <input name="authorized_fuel" type="litre" id="litre" placeholder="" required="">
                         </fieldset>
-                        
+
                         </div>
 
-                       
+
 
 
                         <div class="col-lg-6">
@@ -93,8 +93,22 @@
 <h6 style="color:black;">Last Refuelling Date</h6>
     <input type="date" name="last_refuelling_date" value="date-three">
 </div>
+
+<div class="col-lg-6">
+    <h6 style="color:black;">Next Maintenance Date</h6>
+        <input type="date" name="next_maintenance_date" required>
+    </div>
+
+    <div class="col-lg-6">
+    <h6 style="color:black;">Maintenance KM Limit</h6>
+        <input type="number" name="maintenance_km_limit" value="0">
+    </div>
+    <div class="col-lg-6">
+        <h6 style="color:black;">Fuel Limit</h6>
+            <input type="number" name="refuling_limit" value="0">
+        </div>
 <br>
-<br>                      
+<br>
 
                         <div class="col-lg-12">
                           <fieldset>
@@ -102,7 +116,7 @@
                           </fieldset>
                         </div>
 
-                       
+
                       </div>
                     </form>
 
@@ -129,10 +143,10 @@
 <script src="assets/js/scrollreveal.min.js"></script>
 <script src="assets/js/waypoints.min.js"></script>
 <script src="assets/js/jquery.counterup.min.js"></script>
-<script src="assets/js/imgfix.min.js"></script> 
-<script src="assets/js/slick.js"></script> 
-<script src="assets/js/lightbox.js"></script> 
-<script src="assets/js/isotope.js"></script> 
+<script src="assets/js/imgfix.min.js"></script>
+<script src="assets/js/slick.js"></script>
+<script src="assets/js/lightbox.js"></script>
+<script src="assets/js/isotope.js"></script>
 
 <!-- Global Init -->
 <script src="assets/js/custom.js"></script>
@@ -148,7 +162,7 @@
           $("."+selectedClass).fadeIn();
           $("#portfolio").fadeTo(50, 1);
         }, 500);
-            
+
         });
     });
 

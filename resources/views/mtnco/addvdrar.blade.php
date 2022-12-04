@@ -54,7 +54,7 @@
 </div>
 
 
-    <div class="col-md-6 col-sm-12">
+    {{-- <div class="col-md-6 col-sm-12">
         <h6 style="color:black;">Vehicle</h6>
         <fieldset>
             <select name="vehicle_id" id="cars" required>
@@ -67,9 +67,9 @@
 
             </select>
         </fieldset>
-    </div>
+    </div> --}}
 
-    <div class="col-md-6 col-sm-12">
+    {{-- <div class="col-md-6 col-sm-12">
         <h6 style="color:black;">Vehicle</h6>
         <fieldset>
             <select name="driver_id" id="cars" required>
@@ -82,7 +82,7 @@
 
             </select>
         </fieldset>
-    </div>
+    </div> --}}
 
     {{-- <div class="col-lg-6 col-sm-12">
     <h6 style="color:black;">V_ID</h6>

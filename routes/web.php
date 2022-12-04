@@ -60,6 +60,10 @@ Route::get("/admin-drivers",[AdminController::class,"adminDriverList"]);
 
 
 
+
+
+
+
 Route::get("/jeeplist",[MtncoController::class,"jeeplist"]);
 Route::get("/ton",[MtncoController::class,"ton"]);
 Route::get("/pickuplist",[MtncoController::class,"pickuplist"]);
@@ -85,6 +89,13 @@ Route::get("/predictions",[MtncoController::class,"predictions"]);
 Route::get("/schedule-lists",[MtncoController::class,"scheduleList"]);
 
 
+
+// Vehical Route For user
+Route::get("/mtnco/vehicle-list/{type}",[MtncoController::class,"vehicleList"]);
+Route::get("/mtnco/vehicle-add/{type}",[MtncoController::class,"vehicleAdd"]);
+Route::get("/vdra-record-add/{id}",[MtncoController::class,"vdraRecordAdd"]);
+
+
 //driver
 Route::get("/drivers",[MtncoController::class,"drivers"]);
 Route::post("/drivers",[MtncoController::class,"uploaddriver"]);
@@ -107,6 +118,15 @@ Route::post("/infolist",[MtncoController::class,"uploadinfo"]);
 Route::get("/addinfo",[MtncoController::class,"getinfo"]);
 Route::post("/addinfo",[MtncoController::class,"uploadinfo"]);
 Route::get("/jeep1",[MtncoController::class,"showinfo"]);
+
+Route::post("/vehicles-edit/{id}",[MtncoController::class,"updateVehicle"]);
+
+
+Route::post("/add-vdrarecord/store/{id}",[MtncoController::class,"addVdraRecordStore"]);
+
+
+
+
 //
 
 //tonlist

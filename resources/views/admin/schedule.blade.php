@@ -60,7 +60,7 @@
                                  <th>Start Time</th>
                                  <th>End Time</th>
                                  <th>Fuel</th>
-                                <th>Last maint date</th>
+                                {{-- <th>Last maint date</th> --}}
                                 <th>Status</th>
                                 <th>Comment</th>
 
@@ -72,9 +72,9 @@
                         <tr>
                         <td>{{$loop->iteration}}</td>
                             <td>{{$data->date}}</td>
-                            <td>{{$data->vehicle_type}}</td>
-                            <td>{{$data->v_id}}</td>
-                            <td>{{$data->drivers_name}}</td>
+                            <td>{{$data->vehicle->v_name}}</td>
+                            <td>{{$data->vehicle->v_id}}</td>
+                            <td>{{$data->driver->name}}</td>
                             <td>{{$data->second_seater_name}}</td>
                             <td>{{$data->authority}}</td>
                             <td>{{$data->destination}}</td>
@@ -82,7 +82,7 @@
                             <td>{{$data->start_time}}</td>
                             <td>{{$data->probable_end_time}}</td>
                             <td>{{$data->present_fuel}}</td>
-                            <td>{{$data->last_maintenance_date}}</td>
+                            {{-- <td>{{$data->last_maintenance_date}}</td> --}}
                             <td class="bg-success">{{$data->status}}</td>
                             <td>{{$data->comment}}</td>
 

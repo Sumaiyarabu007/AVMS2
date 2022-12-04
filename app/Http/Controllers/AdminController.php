@@ -10,7 +10,9 @@ use App\Models\Jeeplist;
 use App\Models\Tonlist;
 use App\Models\Pickuplist;
 use App\Models\Driverlist;
-
+use App\Models\SheduleRequest;
+use App\Models\Vehicle;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -40,7 +42,7 @@ class AdminController extends Controller
 
     public function showadminjeep(Request $request)
     {
-        $data=jeeplist::where(function ($q) use ($request){
+        $data=Vehicle::where('v_type','jeep')->where(function ($q) use ($request){
             if(isset($request->v_id)){
                $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
             }
@@ -57,7 +59,7 @@ public function adminton()
 }
 public function showadminton(Request $request)
 {
-    $data=tonlist::where(function ($q) use ($request){
+    $data=Vehicle::where('v_type','3ton')->where(function ($q) use ($request){
         if(isset($request->v_id)){
            $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
         }
@@ -69,7 +71,7 @@ public function showadminton(Request $request)
 //
 public function adminpickup(Request $request)
 {
-    $data=pickuplist::where(function ($q) use ($request){
+    $data=Vehicle::where('v_type','pickup')->where(function ($q) use ($request){
         if(isset($request->v_id)){
            $q->where('v_id', 'LIKE', '%' . $request->v_id. '%');
         }
@@ -115,8 +117,8 @@ public function adminpickup(Request $request)
 
     public function show()
     {
-        $pendingData=requestlist::where('status','pending')->orderBy('id','DESC')->get();
-        $declinedData=requestlist::where('status','declined')->orderBy('id','DESC')->get();
+        $pendingData=SheduleRequest::with('vehicle','driver')->where('status','pending')->orderBy('id','DESC')->get();
+        $declinedData=SheduleRequest::with('vehicle','driver')->where('status','declined')->orderBy('id','DESC')->get();
 
         return view("admin.adminrequest",compact("pendingData",'declinedData'));
     }
@@ -151,14 +153,14 @@ public function adminpickup(Request $request)
 
     public function deleterequest($id)
     {
-        $data=requestlist::find($id);
+        $data=SheduleRequest::find($id);
         $data->delete();
         return redirect()->back()->with('success','Request Delete Success');
     }
 
     public function approvedRequest($id){
 
-        $statusApproved = Requestlist::find($id);
+        $statusApproved = SheduleRequest::find($id);
         $statusApproved->status = 'approved';
         $statusApproved->save();
 
@@ -169,7 +171,7 @@ public function adminpickup(Request $request)
 
     public function declinedRequest($id){
 
-        $statusApproved = Requestlist::find($id);
+        $statusApproved = SheduleRequest::find($id);
         $statusApproved->status = 'declined';
         $statusApproved->save();
 
@@ -180,14 +182,30 @@ public function adminpickup(Request $request)
 
     public function adminScheduleList(){
 
-        $scheduleData = Requestlist::where('status','approved')->orderBy('id','DESC')->get();
+        $scheduleData = SheduleRequest::with('vehicle','driver')->where('status','approved')->orderBy('id','DESC')->get();
 
         return view('admin.schedule',compact('scheduleData'));
     }
 
     public function predictions(){
 
-        return view('admin.predictions');
+        $startDate = date('Y-m-01');
+        $endDate = date('Y-m-t');
+
+        $getJeepLists = Vehicle::all();
+
+        // ->get();
+
+        $monthlyUsed =  Vehicle::select('vehicles.*','vdra_records.date_vdra', DB::raw('SUM(shedule_km_ride_vdra) as total_km'))
+        ->join('vdra_records', 'vehicles.id', '=', 'vdra_records.vehicle_id_vdra')
+        ->where(DB::raw('date(vdra_records.date_vdra)'),'>=',$startDate)
+        ->where(DB::raw('date(vdra_records.date_vdra)'),'<=',$endDate)
+        ->groupBy('vehicles.id','vdra_records.date_vdra')
+        ->orderBy('total_km','desc')
+        ->get();
+
+
+        return view('admin.predictions',compact('getJeepLists','monthlyUsed'));
     }
 
     public function adminDriverList(Request $request)
