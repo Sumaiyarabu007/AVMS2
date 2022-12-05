@@ -46,8 +46,17 @@
                                     <i class="mdi mdi-calendar-today text-success"></i>
                                 </div>
                             </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">Log Out</p>
+                            <div class="dropdown-item preview-item">
+
+
+                                    <a class="btn btn-info" href="#" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Logout</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
+                                                         @csrf
+                                    </form>
+
                             </div>
                         </a>
                     </div>
