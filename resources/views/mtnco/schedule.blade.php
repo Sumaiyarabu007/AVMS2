@@ -124,13 +124,13 @@
                                                 <form action="/add-vdrarecord/store/{{$data->id}}" method="Post">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label for="">KM READING	</label>
+                                                        <label for="">KM READING</label>
                                                         <input type="text" class="" name="km_reading_vdra" id="" required=""  placeholder="KM READING	">
                                                     </div>
-                                                    <div class="form-group">
+                                                    {{-- <div class="form-group">
                                                         <label for="">Present Fuel</label>
                                                         <input type="text" class="" id="" name="present_fuel_vdra" required="" placeholder="Present Fuel">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="form-group">
                                                       <label for="">When In Time</label>
                                                       <input name="when_check_in_vdra" type="time" id="time" placeholder="when Out" required="">

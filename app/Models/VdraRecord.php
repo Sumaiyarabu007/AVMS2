@@ -38,7 +38,6 @@ class VdraRecord extends Model
         if($sumKmSpend){
 
 
-
             if($sumKmSpend>0){
 
             $divideKm = $sumKmSpend / $countRow;
@@ -60,10 +59,10 @@ class VdraRecord extends Model
             }
 
         }
-    }else{
-        return $getDetails->next_maintenance_date;
+        }else{
+            return $getDetails->next_maintenance_date;
 
-    }
+        }
 
     }
 

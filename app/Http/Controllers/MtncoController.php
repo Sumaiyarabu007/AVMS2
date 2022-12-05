@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Requestlist;
 use App\Models\User;
 use App\Models\Driverlist;
+use App\Models\FuelingRecord;
 use App\Models\Jeeplist;
 use App\Models\Infolist;
 use App\Models\Tonlist;
@@ -105,8 +106,15 @@ class MtncoController extends Controller
         $data->next_maintenance_date = $request->next_maintenance_date;
         $data->maintenance_km_limit = $request->maintenance_km_limit;
         $data->refuling_limit = $request->refuling_limit;
-
+        $data->milage_per_leter = $request->milage_per_leter;
         $data->save();
+
+        $addFuelingRecord = new FuelingRecord();
+        $addFuelingRecord->vehicle_id = $data->id;
+        $addFuelingRecord->fuel_amount = $request->authorized_fuel;
+        $addFuelingRecord->date = $request->last_refuelling_date;
+        $addFuelingRecord->save();
+
         return redirect() ->back() ;
     }
 
@@ -153,11 +161,16 @@ public function uploadton(Request $request)
     $data->last_maintenance_date =$request->last_maintenance_date;
     $data->last_refuelling_date =$request->last_refuelling_date;
     $data->next_maintenance_date = $request->next_maintenance_date;
-        $data->maintenance_km_limit = $request->maintenance_km_limit;
-        $data->refuling_limit = $request->refuling_limit;
-
-
+    $data->maintenance_km_limit = $request->maintenance_km_limit;
+    $data->refuling_limit = $request->refuling_limit;
+    $data->milage_per_leter = $request->milage_per_leter;
     $data->save();
+
+    $addFuelingRecord = new FuelingRecord();
+    $addFuelingRecord->vehicle_id = $data->id;
+    $addFuelingRecord->fuel_amount = $request->authorized_fuel;
+    $addFuelingRecord->date = $request->last_refuelling_date;
+    $addFuelingRecord->save();
     return redirect() ->back() ;
 }
 
@@ -202,7 +215,16 @@ public function uploadpickup(Request $request)
     $data->next_maintenance_date = $request->next_maintenance_date;
     $data->maintenance_km_limit = $request->maintenance_km_limit;
     $data->refuling_limit = $request->refuling_limit;
+    $data->milage_per_leter = $request->milage_per_leter;
     $data->save();
+
+    $addFuelingRecord = new FuelingRecord();
+    $addFuelingRecord->vehicle_id = $data->id;
+    $addFuelingRecord->fuel_amount = $request->authorized_fuel;
+    $addFuelingRecord->date = $request->last_refuelling_date;
+    $addFuelingRecord->save();
+
+
     return redirect() ->back() ;
 }
 
@@ -475,6 +497,10 @@ public function showpickup(Request $request)
         ->get();
 
 
+
+    //    return $test = Vehicle::all();
+
+
         // return $getJeepLists;
         return view('mtnco.predictions',compact('monthlyUsed','getJeepLists'));
     }
@@ -501,8 +527,11 @@ public function showpickup(Request $request)
        $vehicleDetails = Vehicle::find($sheduleDetails->vehicle_id);
 
        $shedule_km_ride_vdra = ($request->km_reading_vdra - $vehicleDetails->authorized_mileage);
-       $shedule_fuel_spend_vdra = ($vehicleDetails->authorized_fuel - $request->present_fuel_vdra );
 
+    //    $shedule_fuel_spend_vdra = ($vehicleDetails->authorized_fuel - $request->present_fuel_vdra );
+       $shedule_fuel_spend_vdra = ($shedule_km_ride_vdra / $vehicleDetails->milage_per_leter);
+       $shedule_fuel_spend_vdra = intval($shedule_fuel_spend_vdra);
+        $present_fuelVdra = $vehicleDetails->authorized_fuel - $shedule_fuel_spend_vdra;
 
 
         // return $request;
@@ -514,7 +543,7 @@ public function showpickup(Request $request)
         $data->when_check_in_vdra = $request->when_check_in_vdra;
         $data->when_check_out_vdra = $request->when_check_out_vdra;
         $data->km_reading_vdra = $request->km_reading_vdra;
-        $data->present_fuel_vdra = $request->present_fuel_vdra;
+        $data->present_fuel_vdra = $present_fuelVdra;
         $data->shedule_km_ride_vdra = $shedule_km_ride_vdra??0;
         $data->shedule_fuel_spend_vdra =  $shedule_fuel_spend_vdra??0;
         $data->status = 'good';
@@ -522,7 +551,7 @@ public function showpickup(Request $request)
 
         $updateVehicleData = Vehicle::find($sheduleDetails->vehicle_id);
         $updateVehicleData->authorized_mileage = $request->km_reading_vdra;
-        $updateVehicleData->authorized_fuel = $request->present_fuel_vdra;
+        $updateVehicleData->authorized_fuel = $present_fuelVdra;
         $updateVehicleData->save();
 
         return redirect() ->back()->with('success','VDRA Addedd Success') ;
@@ -544,7 +573,68 @@ public function showpickup(Request $request)
     }
 
 
+    public function vehicleRefueling(Request $request,$id){
 
+
+
+        // return $request;
+
+            $getData = Vehicle::where('id',$id)->first();
+
+             $present_refuelingDate = date('Y-m-d',strtotime($request->present_refueling_date));
+
+        if($getData){
+
+            $getKM = VdraRecord::where('vehicle_id_vdra',$id)
+            ->where(DB::raw('date(date_vdra)'),'>=',date('Y-m-d',strtotime($getData->last_refuelling_date)))
+            ->where(DB::raw('date(date_vdra)'),'<=',date('Y-m-d',strtotime($present_refuelingDate)))
+            ->sum('shedule_km_ride_vdra');
+
+            if($getKM > 0 ){
+
+                $milagePerLiter = $getKM /  $request->authorized_fuel;
+                $milagePerLiter = intval($milagePerLiter);
+                $update = Vehicle::find($id);
+                $update->milage_per_leter = intval($milagePerLiter);
+                $update->authorized_fuel = $request->authorized_fuel;
+                $update->last_refuelling_date = $present_refuelingDate;
+                $update->present_refueling_date = $present_refuelingDate;
+                $update->save();
+
+
+                $addFuelingRecord = new FuelingRecord();
+                $addFuelingRecord->vehicle_id = $id;
+                $addFuelingRecord->fuel_amount = $request->authorized_fuel;
+                $addFuelingRecord->date = $present_refuelingDate;
+                $addFuelingRecord->save();
+
+
+
+            }
+
+
+
+        }else{
+
+            return redirect()->back()->with('error','Not Found!');
+
+
+        }
+
+        return redirect()->back()->with('error','Not Found!');
+
+
+
+    }
+
+    public function vehicleMaintanance(Request $request,$id){
+
+        $update = Vehicle::find($id);
+        $update->last_maintenance_date = date("Y-m-d",strtotime($request->last_maintenance_date));
+        $update->next_maintenance_date = date("Y-m-d",strtotime( $request->next_maintenance_date));
+        $update->save();
+        return redirect()->back()->with('success','Maintance Successfully !');
+    }
 
 
 

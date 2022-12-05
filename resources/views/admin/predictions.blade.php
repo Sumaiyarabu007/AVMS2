@@ -53,14 +53,20 @@
                                     <th>mailage</th>
 
                                 </tr>
-                                @foreach ($getJeepLists as $row)
+                                    @php
+                                    $milagePrediction = app\Models\Vehicle::orderBy('milage_per_leter','desc')->get();
 
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$row->v_name}}</td>
-                                    <td>{{$milagePerLiter = App\Models\VdraRecord::milage_per_liter($row->id)}}</td>
+                                    @endphp
+                                 @foreach ($milagePrediction as $row)
 
-                                </tr>
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$row->v_name}}</td>
+                                        {{-- <td>{{$milagePerLiter = App\Models\VdraRecord::milage_per_liter($row->id)}}</td> --}}
+                                        <td>{{$row->milage_per_leter}}</td>
+
+
+                                    </tr>
 
                                 @endforeach
 

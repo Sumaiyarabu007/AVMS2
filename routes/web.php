@@ -124,6 +124,9 @@ Route::post("/vehicles-edit/{id}",[MtncoController::class,"updateVehicle"]);
 
 Route::post("/add-vdrarecord/store/{id}",[MtncoController::class,"addVdraRecordStore"]);
 
+Route::post("/vehicle/refueling/{id}",[MtncoController::class,"vehicleRefueling"]);
+Route::post("/vehicle/maintanance/{id}",[MtncoController::class,"vehicleMaintanance"]);
+
 
 
 

@@ -39,43 +39,51 @@
 
 
                         <div class="col-lg-6 col-sm-12">
-                        <h6 style="color:black;">V_ID</h6>
-                          <fieldset>
-                            <input name="v_id" type="text" placeholder="" required="">
-                          </fieldset>
-                        </div>
+                            <h6 style="color:black;">V_ID</h6>
+                              <fieldset>
+                                <input name="v_id" type="text" placeholder="" required="">
+                              </fieldset>
+                            </div>
 
-                        <div class="col-lg-6 col-sm-12">
-                        <h6 style="color:black;">V_Name</h6>
-                          <fieldset>
-                            <input name="v_name" type="text" id="" placeholder="" required="">
-                          </fieldset>
-                        </div>
+                            <div class="col-lg-6 col-sm-12">
+                            <h6 style="color:black;">V_Name</h6>
+                              <fieldset>
+                                <input name="v_name" type="text" id="" placeholder="" required="">
+                              </fieldset>
+                            </div>
 
-                        <div class="col-lg-6 col-sm-12">
-                        <h6 style="color:black;">License Number</h6>
-                          <fieldset>
-                            <input name="license_number" type="text" id="" placeholder="" required="">
-                          </fieldset>
-                        </div>
+                            <div class="col-lg-6 col-sm-12">
+                            <h6 style="color:black;">License Number</h6>
+                              <fieldset>
+                                <input name="license_number" type="text" id="" placeholder="" required="">
+                              </fieldset>
+                            </div>
 
 
 
-                        <div class="col-lg-6 col-sm-12">
-                        <h6 style="color:black;">Authorized Mileage</h6>
-                          <fieldset>
-                          <input name="authorized_mileage" type="distance" id="distance" placeholder="" required="">
-                        </fieldset>
+                            <div class="col-lg-6 col-sm-12">
+                            <h6 style="color:black;">Authorized Present KM</h6>
+                              <fieldset>
+                              <input name="authorized_mileage" type="distance" id="distance" placeholder="" required="">
+                            </fieldset>
 
-                        </div>
+                            </div>
 
-                        <div class="col-lg-6 col-sm-12">
-                        <h6 style="color:black;">Authorized Fuel</h6>
-                          <fieldset>
-                          <input name="authorized_fuel" type="litre" id="litre" placeholder="" required="">
-                        </fieldset>
+                            <div class="col-lg-6 col-sm-12">
+                                <h6 style="color:black;">Authorized Mileage</h6>
+                                  <fieldset>
+                                  <input name="milage_per_leter" type="distance" id="distance" placeholder="" required="">
+                                </fieldset>
 
-                        </div>
+                                </div>
+
+                            <div class="col-lg-6 col-sm-12">
+                            <h6 style="color:black;">Authorized Fuel</h6>
+                              <fieldset>
+                              <input name="authorized_fuel" type="litre" id="litre" placeholder="" required="">
+                            </fieldset>
+
+                            </div>
 
 
 
@@ -86,12 +94,12 @@
                             </div>
                             <div class="col-lg-6">
                             <h6 style="color:black;">Last Maintenance Date</h6>
-                                <input type="date" name="last_maintenance_date" required>
+                                <input type="date" name="last_maintenance_date" value="date-two">
                             </div>
 
                             <div class="col-lg-6">
                             <h6 style="color:black;">Last Refuelling Date</h6>
-                                <input type="date" name="last_refuelling_date" required>
+                                <input type="date" name="last_refuelling_date" value="date-three">
                             </div>
 
                             <div class="col-lg-6">
@@ -107,8 +115,9 @@
                                     <h6 style="color:black;">Fuel Limit</h6>
                                         <input type="number" name="refuling_limit" value="0">
                                     </div>
-                            <br>
-                            <br>
+                                <br>
+                                <br>
+
 
                         <div class="col-lg-12">
                           <fieldset>

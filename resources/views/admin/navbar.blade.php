@@ -40,7 +40,7 @@
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
+                        {{-- <a href="#" class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-calendar-today text-success"></i>
@@ -49,7 +49,15 @@
                             <div class="preview-item-content">
                                 <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
                             </div>
-                        </a>
+                        </a> --}}
+
+                        <a class="dropdown-item preview-item" href="#" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Logout</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
+                                                         @csrf
+                                    </form>
                     </div>
                 </div>
             </li>
